@@ -55,13 +55,14 @@ router.post("/signin", middlewares_1.SigninMid, (req, res) => __awaiter(void 0, 
     });
 }));
 router.post("/content", middlewares_1.ContentMid, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, link } = req.body;
+    const { title, link, type } = req.body;
     //@ts-ignore
     const id = req.user.id_;
     try {
         const response = yield schema_1.Content.create({
             title: title,
             link: link,
+            type: type,
             tags: [],
             userId: id
         });
@@ -84,10 +85,8 @@ router.post("/content", middlewares_1.ContentMid, (req, res) => __awaiter(void 0
 }));
 router.get("/content", middlewares_1.ContentMid, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //@ts-ignore
-    console.log(req.user);
-    //@ts-ignore
     const userId = req.user.id_;
-    const course = yield schema_1.Content.findOne({
+    const course = yield schema_1.Content.find({
         userId: userId
     }).populate("userId", "username");
     if (course) {

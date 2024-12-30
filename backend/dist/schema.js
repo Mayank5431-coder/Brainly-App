@@ -27,6 +27,10 @@ const contentSchema = new mongoose_2.Schema({
         type: String,
         required: true
     },
+    type: {
+        type: String,
+        required: true
+    },
     tags: [{
             type: mongoose_2.Schema.Types.ObjectId,
             ref: 'Tag',
